@@ -4,16 +4,22 @@
 
 using namespace std;
 
+
+template<class T>
+bool predicat(T elem) {
+    if (elem%3==0)
+        return true;
+    else return false;
+}
+
 template<class T>
 list<T> filter(list<T>lst) {
 
     list<T> nLst;
-    if (lst.size() == NULL) {
-        return nLst;
-    }
-    list<int>::iterator p = lst.begin();
+    auto p = lst.begin();
+
     while (p != lst.end()) {
-        if (*p%3==0) {
+        if (predicat(*p)) {
             nLst.push_back(*p);
         }
         p++;
@@ -23,11 +29,8 @@ list<T> filter(list<T>lst) {
 template<class T>
 void pop(list<T>& lst, T element) {
 
-    if (lst.size() == NULL) {
-        exit(0);
-    }
+    auto p = lst.begin();
 
-    list<int>::iterator p = lst.begin();
     while (p != lst.end()) {
         if (*p == element) {
             lst.remove(element);
@@ -38,16 +41,23 @@ void pop(list<T>& lst, T element) {
 }
 
 template<class T>
-void push(list<T>& lst, T element) {
-    list<int>::iterator p = lst.begin();
-    while (p != lst.end())
-    {
-        if (*p > element && element > 0)
-            break;
-        else
-            p++;
+void push(list<T>& lst, T elem) {
+
+    if (lst.empty()) {
+        lst.push_back(elem);
     }
-    lst.insert(p, element);
+
+    else {
+        auto p = lst.begin();
+
+        while (p != lst.end()) {
+            if (*p > elem) {
+                break;
+            }
+            p++;
+        }
+        lst.insert(p, elem);
+    }
 }
 
 int main()
