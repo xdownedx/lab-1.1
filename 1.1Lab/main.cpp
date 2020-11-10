@@ -6,20 +6,18 @@ using namespace std;
 
 
 template<class T>
-bool predicat(T elem) {
-    if (elem%3==0)
-        return true;
-    else return false;
+bool predicat(T elem, int value) {
+    return elem%value==0;
 }
 
 template<class T>
-list<T> filter(list<T>lst) {
+list<T> filter(list<T>lst, int value) {
 
     list<T> nLst;
     auto p = lst.begin();
 
     while (p != lst.end()) {
-        if (predicat(*p)) {
+        if (predicat<T>((*p),value)) {
             nLst.push_back(*p);
         }
         p++;
@@ -70,7 +68,7 @@ int main()
     push(lst, 1);
     pop(lst, 20);
 
-    lst = filter(lst);
+    lst = filter(lst, 3);
 
     list<int>::iterator p = lst.begin();
     while (p != lst.end())
